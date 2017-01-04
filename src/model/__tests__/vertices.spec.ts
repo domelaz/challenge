@@ -13,15 +13,7 @@ chai.use(chaiAsPromised);
 import Model from "../";
 import Vertice from "../vertice";
 
-describe("Graph", function() {
-  it("Model class", () => {
-    const model = new Model();
-    expect(model).to.respondTo("add");
-    expect(model).to.respondTo("remove");
-    expect(model).to.respondTo("getRoute");
-    expect(model).to.have.property("vertices");
-  });
-
+describe("Vertice", function() {
   it("Add standalone vertice to graph", () => {
     const model = new Model();
     const vertice = new Vertice({x: 0, y: 0});
