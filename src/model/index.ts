@@ -1,1 +1,1 @@
-export default true;
+export default <Elje.Model>true;
