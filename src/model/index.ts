@@ -21,7 +21,9 @@ class Model implements Elje.Model {
     }
 
     if (this.isVertices(_nodes)) {
-      this.vertices = this.vertices.concat(_nodes);
+      const existing = this.vertices;
+      const arrived = _nodes.filter( n => existing.indexOf(n) === -1 );
+      this.vertices = existing.concat(arrived);
     }
 
     return Promise.resolve(this);

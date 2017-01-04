@@ -38,4 +38,16 @@ describe("Graph", function() {
       expect(model.add([vertice]).then(m => m.vertices.length)).eventually.equals(1),
     ]);
   });
+
+  it("Add the same (===) vertice to graph twice do not produce duplicates", () => {
+    const model = new Model();
+    const vertice = new Vertice({x: 0, y: 0});
+    return Promise.all([
+      expect(
+        model.add(vertice)
+        .then(model => model.add(vertice))
+        .then(model => model.vertices.length)
+      ).eventually.equals(1),
+    ]);
+  });
 });
