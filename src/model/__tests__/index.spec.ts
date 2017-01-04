@@ -24,7 +24,7 @@ describe("Graph", function() {
 
   it("Add standalone vertice to graph", () => {
     const model = new Model();
-    const vertice = new Vertice();
+    const vertice = new Vertice({x: 0, y: 0});
     return Promise.all([
       expect(vertice.edges).to.be.undefined,
       expect(model.add(vertice).then(m => m.vertices.length)).eventually.equals(1),
@@ -33,7 +33,7 @@ describe("Graph", function() {
 
   it("Add vertice to graph as array", () => {
     const model = new Model();
-    const vertice = new Vertice();
+    const vertice = new Vertice({x: 0, y: 0});
     return Promise.all([
       expect(model.add([vertice]).then(m => m.vertices.length)).eventually.equals(1),
     ]);
