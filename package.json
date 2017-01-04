@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Тестовое задание на должность Frontend Engineer",
   "main": "src/index.ts",
-  "scripts": {},
+  "scripts": {
+    "coverage": "TS_COVERAGE=true node_modules/.bin/ts-node test/karmaServer.ts",
+    "test": "node_modules/.bin/ts-node test/karmaServer.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/domelaz/challenge.git"
