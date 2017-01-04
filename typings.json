@@ -1,0 +1,15 @@
+{
+  "name": "expl",
+  "dependencies": {},
+  "globalDevDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20160926213833",
+    "chai-as-promised": "registry:dt/chai-as-promised#0.0.0+20160510010627",
+    "karma": "registry:dt/karma#0.13.9+20160811111312",
+    "mocha": "registry:dt/mocha#2.2.5+20161220115504",
+    "node": "registry:dt/node#6.0.0+20161220160159",
+    "promises-a-plus": "registry:dt/promises-a-plus#0.0.0+20160510002910"
+  },
+  "devDependencies": {
+    "log4js": "registry:dt/log4js#0.0.0+20160726182927"
+  }
+}
