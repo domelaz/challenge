@@ -36,7 +36,29 @@ class Model implements Elje.Model {
     return Array.isArray(arg) ? arg : [arg];
   }
 
+  /**
+   * TypeScript helper function
+   */
+  protected isVertices(nodes: Array<Elje.NodeType>): nodes is Elje.Vertice[] {
+    return nodes[0].type === "vertice";
+  }
+
+  /**
+   * Returns function binded with collection of `nodes` type
+   */
+  protected typeBind(cb: Function, nodes: Array<Elje.NodeType>) {
+    if (this.isVertices(nodes)) {
+      return cb.bind(this, this.vertices);
+    }
+  }
+
+  /**
+   * Add node[s] (Vertice or Edge) to graph
+   */
   public add(node: Elje.NodeType | Elje.NodeType[]) {
+    const args = this.arrize(node);
+    const merger = this.typeBind(this.merge, args);
+    merger(args);
     return Promise.resolve(this);
   }
 
