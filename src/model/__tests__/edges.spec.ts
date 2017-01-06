@@ -38,4 +38,16 @@ describe("Edge", function() {
         .then(m => m.edges.length)).eventually.equal(1),
     ]);
   });
+
+  it("Remove edge from graph", () => {
+    const model = new Model();
+    const node1 = new Vertice({ x: 0, y: 0 });
+    const node2 = new Vertice({ x: 2, y: 2 });
+    const edge = new Edge(node1, node2);
+    return Promise.all([
+      expect(model.add(edge)
+      .then(m => m.remove(edge))
+      .then(m => m.edges.length)).eventually.equal(0),
+    ]);
+  });
 });

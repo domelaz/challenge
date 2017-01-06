@@ -1,6 +1,7 @@
 declare namespace Elje {
 
   interface Node<T> {
+    remove(): void;
     type: "vertice" | "edge";
   }
 
@@ -20,6 +21,7 @@ declare namespace Elje {
     location: Location;
     name?: string;
     hookEdge(edge: Edge): void;
+    releaseEdge(edge: Edge): void;
   }
 
   type NodeType = Edge | Vertice;

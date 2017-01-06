@@ -38,6 +38,20 @@ class Vertice implements Elje.Vertice {
       .sort((a, b) => a.weight > b.weight ? 1 : -1);
     this.edges = new Set(result);
   }
+
+  /**
+   * Disconnect this vertice from edge
+   */
+  public releaseEdge(edge: Elje.Edge) {
+    this.edges.delete(edge);
+  }
+
+  /**
+   * When remove vertice, remove all connected edges too
+   */
+  public remove() {
+    this.edges.forEach(e => e.remove());
+  }
 }
 
 export default Vertice;

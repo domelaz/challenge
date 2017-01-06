@@ -20,6 +20,13 @@ class Edge implements Elje.Edge {
     ];
     return Math.sqrt(Math.pow(xy[0], 2) + Math.pow(xy[1], 2));
   }
+
+  /**
+   * When remove edge, disconnect from parent vertices
+   */
+  public remove() {
+    this.vertices.forEach(v => v.releaseEdge(this), this);
+  }
 }
 
 export default Edge;

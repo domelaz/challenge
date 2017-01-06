@@ -75,7 +75,18 @@ class Model implements Elje.Model {
     return Promise.resolve(this);
   }
 
+  /**
+   * Remove nodes from graph
+   */
   public remove(node: Elje.NodeType | Elje.NodeType[]) {
+    const args = this.arrize(node);
+    const intersector = this.typeBind((x: Elje.NodeType[]) => {
+      this.intersect(x, args).forEach(n => {
+        n.remove();
+        x.splice(x.indexOf(n), 1);
+      });
+    }, args);
+    intersector(args);
     return Promise.resolve(this);
   }
 
