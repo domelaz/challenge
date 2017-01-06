@@ -1,8 +1,10 @@
 class Model implements Elje.Model {
+  public edges: Elje.Edge[];
   public vertices: Elje.Vertice[];
 
   constructor() {
     this.vertices = [];
+    this.edges = [];
   }
 
   /**

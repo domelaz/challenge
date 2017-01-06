@@ -14,6 +14,7 @@ describe("Graph", function() {
     expect(model).to.respondTo("add");
     expect(model).to.respondTo("remove");
     expect(model).to.respondTo("getRoute");
+    expect(model).to.have.property("edges");
     expect(model).to.have.property("vertices");
   });
 });
