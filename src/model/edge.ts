@@ -9,8 +9,16 @@ class Edge implements Elje.Edge {
     this.vertices.forEach(v => v.hookEdge(this), this);
   }
 
+  /**
+   * Euclidean distance used as Edge weight
+   */
   protected calcWeight() {
-    return 42;
+    const [ node1, node2 ] = this.vertices;
+    const xy = [
+      node2.location.x - node1.location.x,
+      node2.location.y - node1.location.y,
+    ];
+    return Math.sqrt(Math.pow(xy[0], 2) + Math.pow(xy[1], 2));
   }
 }
 
