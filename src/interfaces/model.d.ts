@@ -5,7 +5,6 @@ declare namespace Elje {
   }
 
   interface Edge extends Node<Edge> {
-    calcWeight(): number;
     vertices: [Vertice, Vertice];
     weight?: number;
   }

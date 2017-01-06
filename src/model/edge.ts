@@ -17,7 +17,7 @@ class Edge implements Elje.Edge {
     this.weight = this.calcWeight();
   }
 
-  calcWeight() {
+  protected calcWeight() {
     return 42;
   }
 }
