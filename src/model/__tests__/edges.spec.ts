@@ -30,6 +30,7 @@ describe("Edge", function() {
     return Promise.all([
       expect(model.add(edge).then(() => node1.edges[0])).eventually.equal(edge),
       expect(model.add(edge).then(() => node2.edges[0])).eventually.equal(edge),
+      expect(model.add(edge).then(() => edge.weight)).eventually.equal(42),
       expect(model.add(edge).then(m => m.edges.length)).eventually.equal(1),
     ]);
   });
