@@ -42,6 +42,15 @@ class Model implements Elje.Model {
   }
 
   remove(node: Elje.NodeType | Elje.NodeType[]) {
+    const _nodes = this.normalizeToArray(node);
+
+    if (this.isEdges(_nodes)) {
+      const existing = this.edges;
+      const arrived = _nodes.filter( n => existing.indexOf(n) !== -1 );
+      arrived.forEach(edge => edge.remove());
+      this.edges = existing.filter( n => arrived.indexOf(n) === -1 );
+    }
+
     return Promise.resolve(this);
   }
 

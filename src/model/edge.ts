@@ -11,6 +11,20 @@ class Edge implements Elje.Edge {
     }
   }
 
+  protected releaseParent(node: Elje.Vertice) {
+    if (!Array.isArray(node.edges)) {
+      return;
+    }
+
+    const position = node.edges.indexOf(this);
+
+    if (position === -1) {
+      return;
+    }
+
+    node.edges.splice(position, 1);
+  }
+
   constructor (node1: Elje.Vertice, node2: Elje.Vertice) {
     this.vertices = [node1, node2];
     this.vertices.forEach(this.hookParent, this);
@@ -24,6 +38,10 @@ class Edge implements Elje.Edge {
       node2.location.y - node1.location.y,
     ];
     return Math.sqrt(Math.pow(xy[0], 2) + Math.pow(xy[1], 2));
+  }
+
+  public remove() {
+    this.vertices.forEach(this.releaseParent, this);
   }
 }
 
