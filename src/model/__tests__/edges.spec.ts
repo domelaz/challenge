@@ -33,6 +33,8 @@ describe("Edge", function() {
       expect(model.add(edge)
         .then(() => node2.edges.has(edge))).eventually.be.true,
       expect(model.add(edge)
+        .then(() => edge.weight)).eventually.equal(42),
+      expect(model.add(edge)
         .then(m => m.edges.length)).eventually.equal(1),
     ]);
   });
