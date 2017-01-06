@@ -4,6 +4,7 @@ class Edge implements Elje.Edge {
 
   constructor (node1: Elje.Vertice, node2: Elje.Vertice) {
     this.vertices = [node1, node2];
+    this.vertices.forEach(v => v.hookEdge(this), this);
   }
 
   protected calcWeight() {

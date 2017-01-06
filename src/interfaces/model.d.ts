@@ -19,6 +19,7 @@ declare namespace Elje {
     edges: Set<Edge>;
     location: Location;
     name?: string;
+    hookEdge(edge: Edge): void;
   }
 
   type NodeType = Edge | Vertice;

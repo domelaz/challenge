@@ -46,11 +46,22 @@ class Model implements Elje.Model {
   }
 
   /**
+   * TypeScript helper function
+   */
+  protected isEdges(nodes: Array<Elje.NodeType>): nodes is Elje.Edge[] {
+    return nodes[0].type === "edge";
+  }
+
+  /**
    * Returns function binded with collection of `nodes` type
    */
   protected typeBind(cb: Function, nodes: Array<Elje.NodeType>) {
     if (this.isVertices(nodes)) {
       return cb.bind(this, this.vertices);
+    }
+
+    if (this.isEdges(nodes)) {
+      return cb.bind(this, this.edges);
     }
   }
 
