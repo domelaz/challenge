@@ -10,6 +10,16 @@ class Edge implements Elje.Edge {
   }
 
   /**
+   * Return node on the other side of Edge
+   *
+   * @param {Elje.Vertice} node
+   * @return {Elje.Vertice}
+   */
+  public getOpposite(node: Elje.Vertice) {
+    return node === this.vertices[0] ? this.vertices[1] : this.vertices[0];
+  }
+
+  /**
    * Euclidean distance used as Edge weight
    */
   protected calcWeight() {

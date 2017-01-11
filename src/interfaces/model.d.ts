@@ -8,6 +8,7 @@ declare namespace Elje {
   interface Edge extends Node<Edge> {
     vertices: [Vertice, Vertice];
     weight: number;
+    getOpposite(node: Vertice): Vertice;
   }
 
   interface Location {
