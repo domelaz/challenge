@@ -90,8 +90,78 @@ class Model implements Elje.Model {
     return Promise.resolve(this);
   }
 
+  /**
+   * Resolves shortest way between two Vertices in the graph
+   *
+   * Classic Dijkstra's algorithm used
+   * @see https://en.wikipedia.org/wiki/Dijkstra's_algorithm
+   *
+   * @param {Elje.Vertice} start
+   * @param {Elje.Vertice} finish
+   * @returns {Promise<Elje.Edge[]>}
+   */
   public getRoute(start: Elje.Vertice, finish: Elje.Vertice) {
-    return Promise.resolve([]);
+    // Reset movement costs
+    this.vertices.forEach(v => v.cost = Infinity);
+    start.cost = 0;
+
+    // Prepare reverse routes storage
+    const routes = new Map<Elje.Vertice, Elje.Edge[]>();
+    routes.set(start, []);
+
+    const visited = new Set<Elje.Vertice>();
+    let opened = new Set([start]);
+
+    const visit = (nodeSet: Set<Elje.Vertice>) => {
+      const node = nodeSet.values().next().value;
+      const set = getReWeightedNeighbors(node);
+      visited.add(node);
+      opened = new Set([...opened, ...set]);
+      opened.delete(node);
+      return set;
+    };
+
+    /**
+     * "Breadcrumb" reverse route from current node to starting node
+     */
+    const pullReverseRoute = (parent: Elje.Vertice, vertice: Elje.Vertice, edge: Elje.Edge) => {
+      const path = routes.get(parent);
+      routes.set(vertice, [...path!, edge]);
+    };
+
+    /**
+     * Update neighbors of vertice
+     *
+     * Get all connected vertices except already visited,
+     * correct its movement costs, if needed,
+     * and return array of neighbors sorted by updated costs
+     */
+    const getReWeightedNeighbors = (node: Elje.Vertice) => {
+      return [ ...node.edges ]
+        .filter(edge => !visited.has(edge.getOpposite(node)))
+        .map(edge => {
+          const vertice = edge.getOpposite(node);
+          const newRouteCost = node.cost + edge.weight;
+          if (vertice.cost > newRouteCost) {
+            pullReverseRoute(node, vertice, edge);
+            vertice.cost = newRouteCost;
+          }
+          return vertice;
+        })
+        .sort((a, b) => a.cost > b.cost ? 1 : -1 );
+    };
+
+    /**
+     * Main cycle
+     */
+    while (opened.size > 0) {
+      visit(opened);
+    }
+
+    /**
+     * Resolve array of Edges accumulated at target node
+     */
+    return Promise.resolve(routes.get(finish));
   }
 }
 
